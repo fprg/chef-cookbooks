@@ -1,0 +1,11 @@
+{
+  "data_dir": "<%= node.default.consul.data_dir %>",
+  "server": false,
+  "node_name": "<%= node.name %>", 
+  <% if node.automatic.ec2  %>
+  "datacenter": "<%= node.automatic.ec2.placement_availability_zone %>",
+  <% else %>
+  "datacenter": "consul-dc", 
+  <% end %>
+  "log_level": "INFO"
+}

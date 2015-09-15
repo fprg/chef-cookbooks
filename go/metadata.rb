@@ -1,0 +1,7 @@
+name 'go'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures go'
+long_description 'Installs/Configures go'
+version '0.1.0'
