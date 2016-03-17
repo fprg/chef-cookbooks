@@ -1,0 +1,5 @@
+default['serf']['install_version'] = "0.7.0"
+default['serf']['uid'] = "601"
+default['serf']['gid'] = "601"
+default['serf']['config_dir'] = "/etc/serf"
+default['serf']['data_dir'] = "/var/lib/serf"

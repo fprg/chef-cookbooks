@@ -1,0 +1,93 @@
+#!/bin/sh
+#
+# chkconfig: - 89 11
+# description: serf daemon
+# processname: serf
+# config: /etc/serf/serf.json
+
+# Default-Start:
+# Default-Stop: 0 1 2 3 4 5 6
+# Description: serf agent daemon
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+prog="serf"
+user="serf"
+group="serf"
+exec="/usr/local/bin/$prog"
+pidfile="/var/run/$prog.pid"
+lockfile="/var/lock/subsys/$prog"
+logfile="/var/log/$prog.log"
+conffile="<%= node.default.serf.config_dir %>/serf.json"
+
+# pull in sysconfig settings
+[ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+
+start ()
+{
+    echo -n $"Starting Serf:"
+
+    if [ -f $conf ]; then
+        $exec agent -config-file=$conffile &
+    else
+        $exec agent &
+    fi
+
+    #$exec agent > /dev/null &
+    stat=$?
+    echo
+    [ $stat -eq 0 ] && touch $lockfile
+    return $stat
+}
+
+stop()
+{
+    echo -n $"Shutting down Serf:"
+    killproc $prog
+    stat=$?
+    echo
+    [ $stat -eq 0 ] && rm -f $lockfile
+    return $stat
+}
+
+restart()
+{
+    stop
+    start
+}
+
+monitor ()
+{
+    echo -n $"Monitoring Serf:"
+    $exec monitor &
+    return
+}
+
+leave()
+{
+    echo -n $"Force-leave Serf:"
+    $exec force-leave node &
+#    stop
+    stat=$?
+    echo
+    [ $stat -eq 0 ] && rm -f $lockfile
+    return $stat
+}
+
+
+case "$1" in
+    start|stop|restart|monitor|leave)
+        $1
+        ;;
+    force-reload)
+        restart
+        ;;
+    status)
+        status $prog
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|monitor|leave}"
+        exit 2
+        ;;
+esac
