@@ -1,0 +1,5 @@
+default['vault']['install_version'] = "0.5.1"
+default['vault']['uid'] = "602"
+default['vault']['gid'] = "602"
+default['vault']['config_dir'] = "/etc/vault"
+default['vault']['data_dir'] = "/var/lib/vault"
