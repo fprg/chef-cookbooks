@@ -2,7 +2,7 @@
   "data_dir": "<%= node.default.consul.data_dir %>",
   "server": true,
   "bootstrap": false,
-  "bootstrap_expect": 1,
+  "bootstrap_expect": 3,
   "node_name": "<%= node.name %>", 
   <% if node.automatic.ec2  %>
   "datacenter": "<%= node.automatic.ec2.placement_availability_zone %>",

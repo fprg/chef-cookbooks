@@ -1,4 +1,4 @@
-default['consul']['install_version'] = "0.5.2"
+default['consul']['install_version'] = "0.6.3"
 default['consul']['uid'] = "600"
 default['consul']['gid'] = "600"
 default['consul']['config_dir'] = "/etc/consul"

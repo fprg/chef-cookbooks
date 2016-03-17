@@ -15,7 +15,7 @@ remote_file '/tmp/consul.zip' do
   owner 'root'
   group 'root'
   mode '0644'
-  source "https://dl.bintray.com/mitchellh/consul/#{node.consul.install_version}_linux_amd64.zip"
+  source "https://releases.hashicorp.com/consul/#{node.consul.install_version}/consul_#{node.consul.install_version}_linux_amd64.zip"
 end
 
 script 'setup consul' do
@@ -24,7 +24,7 @@ script 'setup consul' do
   cwd '/tmp'
   code <<-EOH
     unzip consul.zip
-    mv ./consul /usr/bin
+    mv ./consul /usr/local/bin
   EOH
 end
 
